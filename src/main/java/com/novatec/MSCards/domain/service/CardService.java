@@ -33,10 +33,10 @@ public class CardService {
     private final ObjectMapper objectMapper;
 
     /**
-     * <p></p>
+     * <p>Method to generate a card number.</p>
      *
-     * @param productId
-     * @return
+     * @param productId Product id -> The first part of the card number generated.
+     * @return The card number generated.
      */
     public Long getCardNumber(Long productId) {
         String productIdStr = String.valueOf(productId);
@@ -48,11 +48,11 @@ public class CardService {
     }
 
     /**
-     * <p></p>
+     * <p>Method to create a card.</p>
      *
-     * @param createCardRequest
-     * @return
-     * @throws JsonProcessingException
+     * @param createCardRequest Object with the info to create a card.
+     * @return Json object with the create card process info.
+     * @throws JsonProcessingException Handle exceptions.
      */
     public String createCard(CreateCardRequest createCardRequest) throws JsonProcessingException {
 
@@ -85,11 +85,11 @@ public class CardService {
     }
 
     /**
-     * <p></p>
+     * <p>Method to activate a card.</p>
      *
-     * @param activateCardRequest
-     * @return
-     * @throws JsonProcessingException
+     * @param activateCardRequest Object with the card info to be activated.
+     * @return Json object with the info about activation process.
+     * @throws JsonProcessingException Handle exceptions.
      */
     public String activateCard(ActivateCardRequest activateCardRequest) throws JsonProcessingException {
 
@@ -113,11 +113,11 @@ public class CardService {
     }
 
     /**
-     * <p></p>
+     * <p>Method to delete a card.</p>
      *
-     * @param cardNumber
-     * @return
-     * @throws JsonProcessingException
+     * @param cardNumber Card number to be deleted.
+     * @return Empty string in case of the correct card delete.
+     * @throws JsonProcessingException Handle exceptions.
      */
     public String deleteCard(Long cardNumber) throws JsonProcessingException {
 
@@ -133,11 +133,11 @@ public class CardService {
     }
 
     /**
-     * <p></p>
+     * <p>Method to block a card.</p>
      *
-     * @param blockCardRequest
-     * @return
-     * @throws JsonProcessingException
+     * @param blockCardRequest Object with the info to block a card.
+     * @return Json object with the info about the block process.
+     * @throws JsonProcessingException Handle exceptions.
      */
     public String blockCard(BlockCardRequest blockCardRequest) throws JsonProcessingException {
 
@@ -159,11 +159,11 @@ public class CardService {
     }
 
     /**
-     * <p></p>
+     * <p>Method to update the balance of a card.</p>
      *
-     * @param updateBalanceRequest
-     * @return
-     * @throws JsonProcessingException
+     * @param updateBalanceRequest Object with the info to update the balance of a card.
+     * @return Json object with the info about the update balance process.
+     * @throws JsonProcessingException Handle exceptions.
      */
     public String updateBalance(UpdateBalanceRequest updateBalanceRequest) throws JsonProcessingException {
 
@@ -180,11 +180,11 @@ public class CardService {
     }
 
     /**
-     * <p></p>
+     * <p>Method to return the balance of a card.</p>
      *
-     * @param cardNumber
-     * @return
-     * @throws JsonProcessingException
+     * @param cardNumber Card number to found the balance.
+     * @return The balance of a card.
+     * @throws JsonProcessingException Handle exceptions.
      */
     public String getBalance(Long cardNumber) throws JsonProcessingException {
 
@@ -199,11 +199,11 @@ public class CardService {
     }
 
     /**
-     * <p></p>
+     * <p>Method to return the details of a card.</p>
      *
-     * @param cardNumber
-     * @return
-     * @throws JsonProcessingException
+     * @param cardNumber Card number to return the details.
+     * @return Json object with the info about details of a card.
+     * @throws JsonProcessingException Handle exceptions.
      */
     public String getCardDetails(Long cardNumber) throws JsonProcessingException {
 
