@@ -2,9 +2,9 @@ package com.novatec.MSCards.web.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.novatec.MSCards.domain.dto.ActivateCardRequest;
-import com.novatec.MSCards.domain.dto.UpdateBalanceRequest;
 import com.novatec.MSCards.domain.dto.BlockCardRequest;
 import com.novatec.MSCards.domain.dto.CreateCardRequest;
+import com.novatec.MSCards.domain.dto.UpdateBalanceRequest;
 import com.novatec.MSCards.domain.service.CardService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
