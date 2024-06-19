@@ -96,4 +96,9 @@ public class CardController {
         String response = cardService.getCardDetails(cardId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
+
+    @GetMapping("/ping")
+    public String ping() {
+        return "pong";
+    }
 }
