@@ -6,6 +6,7 @@ import com.novatec.MSCards.domain.dto.ActivateCardRequest;
 import com.novatec.MSCards.domain.dto.AddBalanceRequest;
 import com.novatec.MSCards.domain.dto.BalanceResponse;
 import com.novatec.MSCards.domain.dto.BlockCardRequest;
+import com.novatec.MSCards.domain.dto.CardDetailResponse;
 import com.novatec.MSCards.domain.dto.CreateCardRequest;
 import com.novatec.MSCards.domain.entity.CardDomain;
 import com.novatec.MSCards.domain.repository.ICardRepository;
@@ -196,6 +197,26 @@ public class CardService {
         if (cardDomain != null) {
             BalanceResponse balanceResponse = cardRepository.getBalance(cardNumber);
             return objectMapper.writeValueAsString(balanceResponse);
+        } else {
+            throw new CardNotFoundException("Card with ID " + cardNumber + " doesn't exist.");
+        }
+    }
+
+    /**
+     * <p></p>
+     *
+     * @param cardNumber
+     * @return
+     * @throws JsonProcessingException
+     */
+    public String getCardDetails(Long cardNumber) throws JsonProcessingException {
+
+        CardDomain cardDomain = cardRepository.findById(cardNumber);
+
+        if (cardDomain != null) {
+            CardDetailResponse cardDetailResponse = cardRepository.getCardDetail(cardNumber);
+            return objectMapper.writeValueAsString(cardDetailResponse);
+
         } else {
             throw new CardNotFoundException("Card with ID " + cardNumber + " doesn't exist.");
         }

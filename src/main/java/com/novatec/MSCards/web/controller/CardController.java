@@ -77,7 +77,6 @@ public class CardController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-
     @GetMapping("/balance/{cardId}")
     public ResponseEntity<?> getBalance(
             @PathVariable("cardId") @Min(value = 1000000000000000L, message = "CardId debe tener 16 dígitos.")
@@ -85,6 +84,16 @@ public class CardController {
             throws JsonProcessingException {
 
         String response = cardService.getBalance(cardId);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @GetMapping("/{cardId}")
+    public ResponseEntity<?> getCardDetails(
+            @PathVariable("cardId") @Min(value = 1000000000000000L, message = "CardId debe tener 16 dígitos.")
+            @Max(value = 9999999999999999L, message = "CardId debe tener 16 dígitos.") Long cardId)
+            throws JsonProcessingException {
+
+        String response = cardService.getCardDetails(cardId);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 }

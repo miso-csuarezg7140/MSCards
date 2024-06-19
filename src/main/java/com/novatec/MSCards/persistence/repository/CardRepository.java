@@ -1,6 +1,7 @@
 package com.novatec.MSCards.persistence.repository;
 
 import com.novatec.MSCards.domain.dto.BalanceResponse;
+import com.novatec.MSCards.domain.dto.CardDetailResponse;
 import com.novatec.MSCards.domain.entity.CardDomain;
 import com.novatec.MSCards.domain.repository.ICardRepository;
 import com.novatec.MSCards.persistence.CRUDRepository.CRUDCardRepository;
@@ -34,5 +35,10 @@ public class CardRepository implements ICardRepository {
     @Override
     public BalanceResponse getBalance(Long cardId) {
         return crudCardRepository.getBalance(cardId);
+    }
+
+    @Override
+    public CardDetailResponse getCardDetail(Long cardId) {
+        return crudCardRepository.getCardDetail(cardId);
     }
 }
