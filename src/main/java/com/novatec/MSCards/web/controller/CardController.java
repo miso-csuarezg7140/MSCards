@@ -2,7 +2,7 @@ package com.novatec.MSCards.web.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.novatec.MSCards.domain.dto.ActivateCardRequest;
-import com.novatec.MSCards.domain.dto.AddBalanceRequest;
+import com.novatec.MSCards.domain.dto.UpdateBalanceRequest;
 import com.novatec.MSCards.domain.dto.BlockCardRequest;
 import com.novatec.MSCards.domain.dto.CreateCardRequest;
 import com.novatec.MSCards.domain.service.CardService;
@@ -70,10 +70,10 @@ public class CardController {
     }
 
     @PostMapping("/balance")
-    public ResponseEntity<?> addBalance(@Valid @RequestBody AddBalanceRequest addBalanceRequest)
+    public ResponseEntity<?> updateBalance(@Valid @RequestBody UpdateBalanceRequest updateBalanceRequest)
             throws JsonProcessingException {
 
-        String response = cardService.addBalance(addBalanceRequest);
+        String response = cardService.updateBalance(updateBalanceRequest);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

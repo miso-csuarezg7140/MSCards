@@ -6,6 +6,7 @@ import com.novatec.MSCards.domain.entity.CardDomain;
 import com.novatec.MSCards.domain.repository.ICardRepository;
 import com.novatec.MSCards.persistence.CRUDRepository.CRUDCardRepository;
 import com.novatec.MSCards.persistence.mapper.ICardMapper;
+import com.novatec.MSCards.persistence.model.Card;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -23,8 +24,9 @@ public class CardRepository implements ICardRepository {
     }
 
     @Override
-    public void save(CardDomain cardDomain) {
-        crudCardRepository.save(cardMapper.fromCardDomain(cardDomain));
+    public CardDomain save(CardDomain cardDomain) {
+        Card card = crudCardRepository.save(cardMapper.fromCardDomain(cardDomain));
+        return cardMapper.toCardDomain(card);
     }
 
     @Override

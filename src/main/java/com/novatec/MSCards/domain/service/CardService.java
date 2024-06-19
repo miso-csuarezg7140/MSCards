@@ -3,7 +3,7 @@ package com.novatec.MSCards.domain.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.novatec.MSCards.domain.dto.ActivateCardRequest;
-import com.novatec.MSCards.domain.dto.AddBalanceRequest;
+import com.novatec.MSCards.domain.dto.UpdateBalanceRequest;
 import com.novatec.MSCards.domain.dto.BalanceResponse;
 import com.novatec.MSCards.domain.dto.BlockCardRequest;
 import com.novatec.MSCards.domain.dto.CardDetailResponse;
@@ -77,8 +77,7 @@ public class CardService {
             cardDomain.setDueDate(today.plusYears(3));
             cardDomain.setStatus(CardState.INACTIVE.getCardState());
 
-            cardRepository.save(cardDomain);
-            cardDomain = cardRepository.findById(cardNumber);
+            cardDomain = cardRepository.save(cardDomain);
             return objectMapper.writeValueAsString(cardDomain);
         } else {
             throw new CardAlreadyExistsException("Card with ID " + cardNumber + " already exists.");
@@ -100,8 +99,7 @@ public class CardService {
         if (cardDomain != null) {
             if (Objects.equals(CardState.INACTIVE.getCardState(), cardDomain.getStatus())) {
                 cardDomain.setStatus(1);
-                cardRepository.save(cardDomain);
-                cardDomain = cardRepository.findById(cardNumber);
+                cardDomain = cardRepository.save(cardDomain);
                 return objectMapper.writeValueAsString(cardDomain);
             } else if (Objects.equals(CardState.ACTIVE.getCardState(), cardDomain.getStatus())) {
                 throw new CardAlreadyActiveException("Card with ID " + cardNumber + " is already active.");
@@ -150,8 +148,7 @@ public class CardService {
             if (Objects.equals(CardState.ACTIVE.getCardState(), cardDomain.getStatus())
                     || Objects.equals(CardState.INACTIVE.getCardState(), cardDomain.getStatus())) {
                 cardDomain.setStatus(3);
-                cardRepository.save(cardDomain);
-                cardDomain = cardRepository.findById(cardNumber);
+                cardDomain = cardRepository.save(cardDomain);
                 return objectMapper.writeValueAsString(cardDomain);
             } else {
                 throw new CardAlreadyBlockedException("Card with ID " + cardNumber + " is already blocked.");
@@ -164,19 +161,18 @@ public class CardService {
     /**
      * <p></p>
      *
-     * @param addBalanceRequest
+     * @param updateBalanceRequest
      * @return
      * @throws JsonProcessingException
      */
-    public String addBalance(AddBalanceRequest addBalanceRequest) throws JsonProcessingException {
+    public String updateBalance(UpdateBalanceRequest updateBalanceRequest) throws JsonProcessingException {
 
-        Long cardNumber = Long.parseLong(addBalanceRequest.getCardId());
+        Long cardNumber = Long.parseLong(updateBalanceRequest.getCardId());
         CardDomain cardDomain = cardRepository.findById(cardNumber);
 
         if (cardDomain != null) {
-            cardDomain.setBalance(cardDomain.getBalance() + addBalanceRequest.getBalance());
-            cardRepository.save(cardDomain);
-            cardDomain = cardRepository.findById(cardNumber);
+            cardDomain.setBalance(cardDomain.getBalance() + updateBalanceRequest.getBalance());
+            cardDomain = cardRepository.save(cardDomain);
             return objectMapper.writeValueAsString(cardDomain);
         } else {
             throw new CardNotFoundException("Card with ID " + cardNumber + " doesn't exist.");

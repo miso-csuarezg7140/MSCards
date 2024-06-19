@@ -8,7 +8,7 @@ public interface ICardRepository {
 
     CardDomain findById(Long cardId);
 
-    void save(CardDomain cardDomain);
+    CardDomain save(CardDomain cardDomain);
 
     void delete(CardDomain cardDomain);
 
