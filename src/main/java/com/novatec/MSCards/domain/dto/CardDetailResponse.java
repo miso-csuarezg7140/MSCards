@@ -14,4 +14,5 @@ public class CardDetailResponse {
     private Long cardId;
     private LocalDateTime dueDate;
     private Integer status;
+    private Long balance;
 }
