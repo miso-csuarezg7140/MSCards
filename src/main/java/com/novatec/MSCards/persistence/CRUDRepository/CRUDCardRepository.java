@@ -13,7 +13,7 @@ public interface CRUDCardRepository extends CrudRepository<Card, Long> {
             "FROM Card c WHERE c.cardId = :cardId")
     BalanceResponse getBalance(@Param("cardId") Long cardId);
 
-    @Query("SELECT DISTINCT new com.novatec.MSCards.domain.dto.CardDetailResponse(c.cardId, c.dueDate, c.status, " +
-            "c.balance) FROM Card c WHERE c.cardId = :cardId")
+    @Query("SELECT DISTINCT new com.novatec.MSCards.domain.dto.CardDetailResponse(c.cardId, c.dueDate, c.status) " +
+            "FROM Card c WHERE c.cardId = :cardId")
     CardDetailResponse getCardDetail(@Param("cardId") Long cardId);
 }
