@@ -18,21 +18,21 @@ import java.time.LocalDateTime;
 public class Card {
 
     @Id
-    @Column(name = "card_id")
+    @Column(name = "card_id", nullable = false)
     private Long cardId;
 
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     private Integer status;
 
-    @Column(name = "cardholder")
+    @Column(name = "cardholder", nullable = false)
     private String cardholder;
 
-    @Column(name = "issued_date")
+    @Column(name = "issued_date", nullable = false)
     private LocalDateTime issuedDate;
 
-    @Column(name = "due_date")
+    @Column(name = "due_date", nullable = false)
     private LocalDateTime dueDate;
 
-    @Column(name = "balance")
+    @Column(name = "balance", nullable = false)
     private Long balance;
 }
