@@ -1,4 +1,4 @@
-package com.novatec.MSCards.persistence.entity;
+package com.novatec.MSCards.persistence.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

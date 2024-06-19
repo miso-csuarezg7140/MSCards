@@ -1,7 +1,7 @@
 package com.novatec.MSCards.persistence.mapper;
 
 import com.novatec.MSCards.domain.entity.CardDomain;
-import com.novatec.MSCards.persistence.entity.Card;
+import com.novatec.MSCards.persistence.model.Card;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 
