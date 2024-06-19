@@ -1,0 +1,185 @@
+#CARD
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: card
+  labels:
+    app: card
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: card
+  template:
+    metadata:
+      labels:
+        app: card
+    spec:
+      containers:
+        - name: card
+          image: us-east1-docker.pkg.dev/technical-test-novatec/technical-test-novatec-microservices/card:latest
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://172.21.144.3:5432/card"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "postgres"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "dbadmin"
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: card-managment-config
+spec:
+  healthCheck:
+    checkIntervalSec: 30
+    port: 8080
+    type: HTTP
+    requestPath: /card/ping
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: servicio-card
+  annotations:
+    cloud.google.com/backend-config: '{"default": "card-managment-config"}'
+spec:
+  type: NodePort
+  selector:
+    app: card
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      nodePort: 31020
+---
+apiVersion: "autoscaling/v2"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "card-hpa"
+  namespace: "default"
+  labels:
+    app: "card"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "card"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 1
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      target:
+        type: "Utilization"
+        averageUtilization: 80
+---
+#TRANSACTION
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transaction
+  labels:
+    app: transaction
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transaction
+  template:
+    metadata:
+      labels:
+        app: transaction
+    spec:
+      containers:
+        - name: transaction
+          image: us-east1-docker.pkg.dev/technical-test-novatec/technical-test-novatec-microservices/transaction:latest
+          ports:
+            - containerPort: 8081
+          imagePullPolicy: Always
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://172.21.144.3:5432/transaction"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: "postgres"
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "dbadmin"
+---
+apiVersion: cloud.google.com/v1
+kind: BackendConfig
+metadata:
+  name: transaction-managment-config
+spec:
+  healthCheck:
+    checkIntervalSec: 30
+    port: 8081
+    type: HTTP
+    requestPath: /transaction/ping
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: servicio-transaction
+  annotations:
+    cloud.google.com/backend-config: '{"default": "transaction-managment-config"}'
+spec:
+  type: NodePort
+  selector:
+    app: transaction
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8081
+      nodePort: 31021
+---
+apiVersion: "autoscaling/v2"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "transaction-hpa"
+  namespace: "default"
+  labels:
+    app: "transaction"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "transaction"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 1
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      target:
+        type: "Utilization"
+        averageUtilization: 80
+---
+# INGRESS
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gateway-ingress
+  labels:
+    name: gateway-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: /card
+        backend:
+          service:
+            name: servicio-card
+            port: 
+              number: 80
+      - pathType: Prefix
+        path: /transaction
+        backend:
+          service:
+            name: servicio-transaction
+            port: 
+              number: 80
