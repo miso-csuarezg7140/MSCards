@@ -1,10 +1,10 @@
-package com.example.NovatecTechnicalTest;
+package com.novatec.MSCards;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class NovatecTechnicalTestApplicationTests {
+class MSCardsApplicationTests {
 
 	@Test
 	void contextLoads() {
