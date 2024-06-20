@@ -6,10 +6,10 @@ import com.novatec.MSCards.domain.dto.BlockCardRequest;
 import com.novatec.MSCards.domain.dto.CreateCardRequest;
 import com.novatec.MSCards.domain.dto.UpdateBalanceRequest;
 import com.novatec.MSCards.domain.service.CardService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -28,20 +28,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/card")
-@Api(value = "Controlador que contiene los métodos del microservicio que gestiona las tarjetas.")
+@Tag(name = "cardController", description = "Controlador que contiene los métodos del microservicio que gestiona " +
+        "las tarjetas.")
 public class CardController {
 
     private final CardService cardService;
 
-    @ApiOperation(value = "Método que retorna un número de tarjeta con los primeros 6 dígitos dependiedo del tipo de " +
-            "producto y los otros 10 dígitos aleatorios.")
+    @Operation(description = "Método que retorna un número de tarjeta con los primeros 6 dígitos dependiedo del " +
+            "tipo de producto y los otros 10 dígitos aleatorios.")
     @ApiResponses(
             value = {
-                    @ApiResponse(code = 200, message = "Respuesta exitosa, se retorna el número de tarjeta generado."),
-                    @ApiResponse(code = 400, message = "Petición incorrecta."),
-                    @ApiResponse(code = 401, message = "Usuario no autorizado."),
-                    @ApiResponse(code = 404, message = "No se encuentra el recurso solicitado."),
-                    @ApiResponse(code = 500, message = "Error del servidor.")
+                    @ApiResponse(responseCode = "200", description = "Respuesta exitosa, se retorna el número de " +
+                            "tarjeta generado."),
+                    @ApiResponse(responseCode = "400", description = "Petición incorrecta."),
+                    @ApiResponse(responseCode = "401", description = "Usuario no autorizado."),
+                    @ApiResponse(responseCode = "404", description = "No se encuentra el recurso solicitado."),
+                    @ApiResponse(responseCode = "500", description = "Error del servidor.")
             }
     )
     @GetMapping("/{productId}/number")
@@ -53,15 +55,16 @@ public class CardController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @ApiOperation(value = "Método que permite la creación de una tarjeta dado un objeto de entrada con la " +
+    @Operation(description = "Método que permite la creación de una tarjeta dado un objeto de entrada con la " +
             "información correspondiente.")
     @ApiResponses(
             value = {
-                    @ApiResponse(code = 200, message = "Respuesta exitosa, se crea la tarjeta correctamente."),
-                    @ApiResponse(code = 400, message = "Petición incorrecta."),
-                    @ApiResponse(code = 401, message = "Usuario no autorizado."),
-                    @ApiResponse(code = 404, message = "No se encuentra el recurso solicitado."),
-                    @ApiResponse(code = 500, message = "Error del servidor.")
+                    @ApiResponse(responseCode = "200", description = "Respuesta exitosa, se crea la tarjeta " +
+                            "correctamente."),
+                    @ApiResponse(responseCode = "400", description = "Petición incorrecta."),
+                    @ApiResponse(responseCode = "401", description = "Usuario no autorizado."),
+                    @ApiResponse(responseCode = "404", description = "No se encuentra el recurso solicitado."),
+                    @ApiResponse(responseCode = "500", description = "Error del servidor.")
             }
     )
     @PostMapping("/create")
@@ -71,14 +74,15 @@ public class CardController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @ApiOperation(value = "Método que permite realizar la activación de una tarjeta previamente creada.")
+    @Operation(description = "Método que permite realizar la activación de una tarjeta previamente creada.")
     @ApiResponses(
             value = {
-                    @ApiResponse(code = 200, message = "Respuesta exitosa, se activa la tarjeta correctamente."),
-                    @ApiResponse(code = 400, message = "Petición incorrecta."),
-                    @ApiResponse(code = 401, message = "Usuario no autorizado."),
-                    @ApiResponse(code = 404, message = "No se encuentra el recurso solicitado."),
-                    @ApiResponse(code = 500, message = "Error del servidor.")
+                    @ApiResponse(responseCode = "200", description = "Respuesta exitosa, se activa la tarjeta " +
+                            "correctamente."),
+                    @ApiResponse(responseCode = "400", description = "Petición incorrecta."),
+                    @ApiResponse(responseCode = "401", description = "Usuario no autorizado."),
+                    @ApiResponse(responseCode = "404", description = "No se encuentra el recurso solicitado."),
+                    @ApiResponse(responseCode = "500", description = "Error del servidor.")
             }
     )
     @PostMapping("/enroll")
@@ -88,14 +92,15 @@ public class CardController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @ApiOperation(value = "Método que ejecuta la eliminación de una tarjeta.")
+    @Operation(description = "Método que ejecuta la eliminación de una tarjeta.")
     @ApiResponses(
             value = {
-                    @ApiResponse(code = 204, message = "Respuesta exitosa, se ha eliminado la tarjeta correctamente."),
-                    @ApiResponse(code = 400, message = "Petición incorrecta."),
-                    @ApiResponse(code = 401, message = "Usuario no autorizado."),
-                    @ApiResponse(code = 404, message = "No se encuentra el recurso solicitado."),
-                    @ApiResponse(code = 500, message = "Error del servidor.")
+                    @ApiResponse(responseCode = "204", description = "Respuesta exitosa, se ha eliminado la tarjeta " +
+                            "correctamente."),
+                    @ApiResponse(responseCode = "400", description = "Petición incorrecta."),
+                    @ApiResponse(responseCode = "401", description = "Usuario no autorizado."),
+                    @ApiResponse(responseCode = "404", description = "No se encuentra el recurso solicitado."),
+                    @ApiResponse(responseCode = "500", description = "Error del servidor.")
             }
     )
     @DeleteMapping("/{cardId}")
@@ -108,14 +113,14 @@ public class CardController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(response);
     }
 
-    @ApiOperation(value = "Método que ejecuta el bloqueo de una tarjeta.")
+    @Operation(description = "Método que ejecuta el bloqueo de una tarjeta.")
     @ApiResponses(
             value = {
-                    @ApiResponse(code = 200, message = "Respuesta exitosa, se bloquea la tarjeta exitosamente."),
-                    @ApiResponse(code = 400, message = "Petición incorrecta."),
-                    @ApiResponse(code = 401, message = "Usuario no autorizado."),
-                    @ApiResponse(code = 404, message = "No se encuentra el recurso solicitado."),
-                    @ApiResponse(code = 500, message = "Error del servidor.")
+                    @ApiResponse(responseCode = "200", description = "Respuesta exitosa, se bloquea la tarjeta exitosamente."),
+                    @ApiResponse(responseCode = "400", description = "Petición incorrecta."),
+                    @ApiResponse(responseCode = "401", description = "Usuario no autorizado."),
+                    @ApiResponse(responseCode = "404", description = "No se encuentra el recurso solicitado."),
+                    @ApiResponse(responseCode = "500", description = "Error del servidor.")
             }
     )
     @PutMapping("/block")
@@ -126,15 +131,15 @@ public class CardController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @ApiOperation(value = "Método que actualiza el saldo de una tarjeta.")
+    @Operation(description = "Método que actualiza el saldo de una tarjeta.")
     @ApiResponses(
             value = {
-                    @ApiResponse(code = 200, message = "Respuesta exitosa, se actualiza el saldo de la tarjeta " +
-                            "correctamente."),
-                    @ApiResponse(code = 400, message = "Petición incorrecta."),
-                    @ApiResponse(code = 401, message = "Usuario no autorizado."),
-                    @ApiResponse(code = 404, message = "No se encuentra el recurso solicitado."),
-                    @ApiResponse(code = 500, message = "Error del servidor.")
+                    @ApiResponse(responseCode = "200", description = "Respuesta exitosa, se actualiza el saldo de " +
+                            "la tarjeta correctamente."),
+                    @ApiResponse(responseCode = "400", description = "Petición incorrecta."),
+                    @ApiResponse(responseCode = "401", description = "Usuario no autorizado."),
+                    @ApiResponse(responseCode = "404", description = "No se encuentra el recurso solicitado."),
+                    @ApiResponse(responseCode = "500", description = "Error del servidor.")
             }
     )
     @PostMapping("/balance")
@@ -145,15 +150,15 @@ public class CardController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @ApiOperation(value = "Método que retorna el saldo de una tarjeta.")
+    @Operation(description = "Método que retorna el saldo de una tarjeta.")
     @ApiResponses(
             value = {
-                    @ApiResponse(code = 200, message = "Respuesta exitosa, se retorna el saldo de la tarjeta " +
-                            "correctamente."),
-                    @ApiResponse(code = 400, message = "Petición incorrecta."),
-                    @ApiResponse(code = 401, message = "Usuario no autorizado."),
-                    @ApiResponse(code = 404, message = "No se encuentra el recurso solicitado."),
-                    @ApiResponse(code = 500, message = "Error del servidor.")
+                    @ApiResponse(responseCode = "200", description = "Respuesta exitosa, se retorna el saldo de la " +
+                            "tarjeta correctamente."),
+                    @ApiResponse(responseCode = "400", description = "Petición incorrecta."),
+                    @ApiResponse(responseCode = "401", description = "Usuario no autorizado."),
+                    @ApiResponse(responseCode = "404", description = "No se encuentra el recurso solicitado."),
+                    @ApiResponse(responseCode = "500", description = "Error del servidor.")
             }
     )
     @GetMapping("/balance/{cardId}")
@@ -166,15 +171,15 @@ public class CardController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @ApiOperation(value = "Método que retorna el detalle de una tarjeta.")
+    @Operation(description = "Método que retorna el detalle de una tarjeta.")
     @ApiResponses(
             value = {
-                    @ApiResponse(code = 200, message = "Respuesta exitosa, se retorna el detalle de la tarjeta " +
+                    @ApiResponse(responseCode = "200", description = "Respuesta exitosa, se retorna el detalle de la tarjeta " +
                             "correctamente."),
-                    @ApiResponse(code = 400, message = "Petición incorrecta."),
-                    @ApiResponse(code = 401, message = "Usuario no autorizado."),
-                    @ApiResponse(code = 404, message = "No se encuentra el recurso solicitado."),
-                    @ApiResponse(code = 500, message = "Error del servidor.")
+                    @ApiResponse(responseCode = "400", description = "Petición incorrecta."),
+                    @ApiResponse(responseCode = "401", description = "Usuario no autorizado."),
+                    @ApiResponse(responseCode = "404", description = "No se encuentra el recurso solicitado."),
+                    @ApiResponse(responseCode = "500", description = "Error del servidor.")
             }
     )
     @GetMapping("/{cardId}")
@@ -187,14 +192,15 @@ public class CardController {
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
-    @ApiOperation(value = "Método que verifica la salud del microservicio.")
+    @Operation(description = "Método que verifica la salud del microservicio.")
     @ApiResponses(
             value = {
-                    @ApiResponse(code = 200, message = "Respuesta exitosa, el microservicio se ejecuta sin problema."),
-                    @ApiResponse(code = 400, message = "Petición incorrecta."),
-                    @ApiResponse(code = 401, message = "Usuario no autorizado."),
-                    @ApiResponse(code = 404, message = "No se encuentra el recurso solicitado."),
-                    @ApiResponse(code = 500, message = "Error del servidor.")
+                    @ApiResponse(responseCode = "200", description = "Respuesta exitosa, el microservicio se " +
+                            "ejecuta sin problema."),
+                    @ApiResponse(responseCode = "400", description = "Petición incorrecta."),
+                    @ApiResponse(responseCode = "401", description = "Usuario no autorizado."),
+                    @ApiResponse(responseCode = "404", description = "No se encuentra el recurso solicitado."),
+                    @ApiResponse(responseCode = "500", description = "Error del servidor.")
             }
     )
     @GetMapping("/ping")

@@ -1,0 +1,847 @@
+{
+	"info": {
+		"_postman_id": "421ff28b-f213-4c47-8316-9f947c511717",
+		"name": "Prueba técnica Novatec",
+		"description": "Colección de prueba de servicios para la prueba técnica de desarrollo backend de Novatec.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30500020"
+	},
+	"item": [
+		{
+			"name": "MSCards",
+			"item": [
+				{
+					"name": "GetCardNumber",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cloudEnv}}/card/124347/number",
+							"host": [
+								"{{cloudEnv}}"
+							],
+							"path": [
+								"card",
+								"124347",
+								"number"
+							]
+						},
+						"description": "Servicio que retorna un número de tarjeta. El resultado será un número de 16 dígitos, siendo los primeros 6 fijos de acuerdo con el tipo de producto que se envíe en el {{pathVariable}} y los otros 10 dígitos son generados aleatoriamente."
+					},
+					"response": [
+						{
+							"name": "GetCardNumber",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.49.240.192/card/124347/number",
+									"protocol": "http",
+									"host": [
+										"34",
+										"49",
+										"240",
+										"192"
+									],
+									"path": [
+										"card",
+										"124347",
+										"number"
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "1243475482753146"
+						}
+					]
+				},
+				{
+					"name": "CreateCard",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productType\": \"D\",\r\n    \"cardholder\": \"Crhistian Suarez\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cloudEnv}}/card/create",
+							"host": [
+								"{{cloudEnv}}"
+							],
+							"path": [
+								"card",
+								"create"
+							]
+						},
+						"description": "Servicio que permite la creación de una tarjeta.\n\n**productType:** Posibles valores: \"C\" o \"D\" para crédito y débito de manera correspondiente.\n\n**cardholder:** Estructura de la forma \"primerNombre\", espacio, \"primerApellido\"."
+					},
+					"response": [
+						{
+							"name": "CreateCard",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productType\": \"D\",\r\n    \"cardholder\": \"Crhistian Suárez\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://34.49.240.192/card/create",
+									"protocol": "http",
+									"host": [
+										"34",
+										"49",
+										"240",
+										"192"
+									],
+									"path": [
+										"card",
+										"create"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"cardId\": 7891235990967370,\n    \"status\": 0,\n    \"cardholder\": \"Crhistian Suarez\",\n    \"issuedDate\": \"2024-06-19 21:47:57\",\n    \"dueDate\": \"2027-06-19 21:47:57\",\n    \"balance\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "ActivateCard",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cardId\": \"7891239198685605\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cloudEnv}}/card/enroll",
+							"host": [
+								"{{cloudEnv}}"
+							],
+							"path": [
+								"card",
+								"enroll"
+							]
+						},
+						"description": "Servicio que permite la activación de una tarjeta.\n\n**cardId:** Debe haberse creado previamente y por ende su longitud será de 16 dígitos."
+					},
+					"response": [
+						{
+							"name": "ActivateCard",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cardId\": \"7891235990967370\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://34.49.240.192/card/enroll",
+									"protocol": "http",
+									"host": [
+										"34",
+										"49",
+										"240",
+										"192"
+									],
+									"path": [
+										"card",
+										"enroll"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"cardId\": 7891235990967370,\n    \"status\": 1,\n    \"cardholder\": \"Crhistian Suarez\",\n    \"issuedDate\": \"2024-06-19 21:47:57\",\n    \"dueDate\": \"2027-06-19 21:47:57\",\n    \"balance\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "updateBalance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cardId\": \"7891239198685605\",\r\n    \"balance\": \"1000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cloudEnv}}/card/balance",
+							"host": [
+								"{{cloudEnv}}"
+							],
+							"path": [
+								"card",
+								"balance"
+							]
+						},
+						"description": "Servicio que permite la actualización del saldo de una tarjeta.\n\n**cardId:** La tarjeta debe existir por lo que su longitud será de 16 dígitos.\n\n**balance:** Puede ser tanto positivo como negativo. Si es negativo, se entiende como una compra realizada y por el contrario, si es negativo, hará referencia a la anulación de una transacción o a una recarga realizada."
+					},
+					"response": [
+						{
+							"name": "updateBalance",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cardId\": \"7891235990967370\",\r\n    \"balance\": \"1000\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://34.49.240.192/card/balance",
+									"protocol": "http",
+									"host": [
+										"34",
+										"49",
+										"240",
+										"192"
+									],
+									"path": [
+										"card",
+										"balance"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"cardId\": 7891235990967370,\n    \"status\": 1,\n    \"cardholder\": \"Crhistian Suarez\",\n    \"issuedDate\": \"2024-06-19 21:47:57\",\n    \"dueDate\": \"2027-06-19 21:47:57\",\n    \"balance\": 1000\n}"
+						}
+					]
+				},
+				{
+					"name": "GetBalance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cloudEnv}}/card/balance/7891235990967370",
+							"host": [
+								"{{cloudEnv}}"
+							],
+							"path": [
+								"card",
+								"balance",
+								"7891235990967370"
+							]
+						},
+						"description": "Servicio que retorna el saldo de una tarjeta.\n\nEl {{pathVariable}} correspondiente al id de la tarjeta debe corresponder con una tajreta existente y por ende su longitud será de 16 dígitos."
+					},
+					"response": [
+						{
+							"name": "GetBalance",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.49.240.192/card/balance/7891235990967370",
+									"protocol": "http",
+									"host": [
+										"34",
+										"49",
+										"240",
+										"192"
+									],
+									"path": [
+										"card",
+										"balance",
+										"7891235990967370"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"cardId\": 7891235990967370,\r\n    \"balance\": 1000\r\n}"
+						}
+					]
+				},
+				{
+					"name": "GetCardDetail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cloudEnv}}/card/7891235990967370",
+							"host": [
+								"{{cloudEnv}}"
+							],
+							"path": [
+								"card",
+								"7891235990967370"
+							]
+						},
+						"description": "Servicio que obtiene el detalle de una tarjeta.\n\nEl {{pathVariable}} correspondiente al id de la tarjeta debe corresponder con una tajreta existente y por ende su longitud será de 16 dígitos."
+					},
+					"response": [
+						{
+							"name": "GetCardDetail",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.49.240.192/card/7891235990967370",
+									"protocol": "http",
+									"host": [
+										"34",
+										"49",
+										"240",
+										"192"
+									],
+									"path": [
+										"card",
+										"7891235990967370"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"cardId\": 7891235990967370,\r\n    \"dueDate\": \"2027-06-19 21:47:57\",\r\n    \"status\": 1\r\n}"
+						}
+					]
+				},
+				{
+					"name": "BlockCard",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cardId\": \"7891235990967370\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cloudEnv}}/card/block",
+							"host": [
+								"{{cloudEnv}}"
+							],
+							"path": [
+								"card",
+								"block"
+							]
+						},
+						"description": "Servicio que ejecuta el bloqueo de una tarjeta.\n\n**cardId:** La tarjeta debe existir y por ende su longitud será de 16 dígitos."
+					},
+					"response": [
+						{
+							"name": "BlockCard",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cardId\": \"7891235990967370\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://34.49.240.192/card/block",
+									"protocol": "http",
+									"host": [
+										"34",
+										"49",
+										"240",
+										"192"
+									],
+									"path": [
+										"card",
+										"block"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"cardId\": 7891235990967370,\r\n    \"status\": 3,\r\n    \"cardholder\": \"Crhistian Suarez\",\r\n    \"issuedDate\": \"2024-06-19 21:47:57\",\r\n    \"dueDate\": \"2027-06-19 21:47:57\",\r\n    \"balance\": 1000\r\n}"
+						}
+					]
+				},
+				{
+					"name": "DeleteCard",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{cloudEnv}}/card/7891235990967370",
+							"host": [
+								"{{cloudEnv}}"
+							],
+							"path": [
+								"card",
+								"7891235990967370"
+							]
+						},
+						"description": "Servicio que permite la eliminación de una tarjeta.\n\nLa tarjeta enviada por {{pathVariable}} debe existir y por ende su longitud será de 16 dígitos."
+					},
+					"response": [
+						{
+							"name": "DeleteCard",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://34.49.240.192/card/7891235990967370",
+									"protocol": "http",
+									"host": [
+										"34",
+										"49",
+										"240",
+										"192"
+									],
+									"path": [
+										"card",
+										"7891235990967370"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Ping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cloudEnv}}/card/ping",
+							"host": [
+								"{{cloudEnv}}"
+							],
+							"path": [
+								"card",
+								"ping"
+							]
+						},
+						"description": "Servicio que verifica la salud del microservicio. Debe retornar \"pong\"."
+					},
+					"response": [
+						{
+							"name": "Ping",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.49.240.192/card/ping",
+									"protocol": "http",
+									"host": [
+										"34",
+										"49",
+										"240",
+										"192"
+									],
+									"path": [
+										"card",
+										"ping"
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "pong"
+						}
+					]
+				}
+			],
+			"description": "Directorio de servicios destinado a la gestión de tarjetas."
+		},
+		{
+			"name": "MSTransactions",
+			"item": [
+				{
+					"name": "Purchase",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cardId\": \"7891239198685605\",\r\n    \"price\": \"10\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cloudEnv}}/transaction/purchase",
+							"host": [
+								"{{cloudEnv}}"
+							],
+							"path": [
+								"transaction",
+								"purchase"
+							]
+						},
+						"description": "Servicio que ejecuta la lógica y persistencia de una compra.\n\n**cardId:** La tarjeta desde la que se va a realizar la compra debe existir y por ende su longitud será de 16 dígitos.\n\n**price:** El monto de la compra debe ser de mínimo un dólar.\n\nEl servicio verifica que la tarjeta cuente con el cupo suficiente para realizar la compra, así como verificar que la tarjeta no se encuentre vencida y que se encuentre activa."
+					},
+					"response": [
+						{
+							"name": "Purchase",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cardId\": \"7891239198685605\",\r\n    \"price\": \"10\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://34.49.240.192/transaction/purchase",
+									"protocol": "http",
+									"host": [
+										"34",
+										"49",
+										"240",
+										"192"
+									],
+									"path": [
+										"transaction",
+										"purchase"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"transactionId\": 3,\n    \"cardId\": 7891239198685605,\n    \"price\": 10,\n    \"transactionDate\": \"2024-06-19 21:52:35\",\n    \"status\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "GetTransaction",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cloudEnv}}/transaction/3",
+							"host": [
+								"{{cloudEnv}}"
+							],
+							"path": [
+								"transaction",
+								"3"
+							]
+						},
+						"description": "Servicio que retorna la información relacionada con una transacción por lo cual esta debe existir."
+					},
+					"response": [
+						{
+							"name": "GetTransaction",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://34.49.240.192/transaction/1",
+									"protocol": "http",
+									"host": [
+										"34",
+										"49",
+										"240",
+										"192"
+									],
+									"path": [
+										"transaction",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"transactionId\": 3,\n    \"cardId\": 7891239198685605,\n    \"price\": 10,\n    \"transactionDate\": \"2024-06-19 21:52:35\",\n    \"status\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "CancelTransaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cardId\": \"7891239198685605\",\r\n    \"transactionId\": \"3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{cloudEnv}}/transaction/anulation",
+							"host": [
+								"{{cloudEnv}}"
+							],
+							"path": [
+								"transaction",
+								"anulation"
+							]
+						},
+						"description": "Servicio que ejecuta la anulación de una transacción.\n\n**cardId:** La tarjeta debe exisitir por ende su longitud será de 16 dígitos.\n\n**transaactionId:** La transacción a anular debe exisitir y será siempre mayor a 1."
+					},
+					"response": [
+						{
+							"name": "CancelTransaction",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cardId\": \"7891239198685605\",\r\n    \"transactionId\": \"3\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{cloudEnv}}/transaction/anulation",
+									"host": [
+										"{{cloudEnv}}"
+									],
+									"path": [
+										"transaction",
+										"anulation"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n    \"transactionId\": 3,\r\n    \"cardId\": 7891239198685605,\r\n    \"price\": 10,\r\n    \"transactionDate\": \"2024-06-19 21:52:35\",\r\n    \"status\": false\r\n}"
+						}
+					]
+				},
+				{
+					"name": "Ping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{cloudEnv}}/transaction/ping",
+							"host": [
+								"{{cloudEnv}}"
+							],
+							"path": [
+								"transaction",
+								"ping"
+							]
+						},
+						"description": "Servicio que verifica la salud del microservicio. Debe retornar \"pong\"."
+					},
+					"response": [
+						{
+							"name": "Ping",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{cloudEnv}}/transaction/ping",
+									"host": [
+										"{{cloudEnv}}"
+									],
+									"path": [
+										"transaction",
+										"ping"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": "pong"
+						}
+					]
+				}
+			],
+			"description": "Directorio de servicios destinado a la gestión de transacciones."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "localEnvCards",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "localEnvTransactions",
+			"value": "http://localhost:8081",
+			"type": "string"
+		},
+		{
+			"key": "cloudEnv",
+			"value": "http://34.49.240.192",
+			"type": "string"
+		}
+	]
+}

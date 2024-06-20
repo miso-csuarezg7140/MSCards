@@ -1,4 +1,4 @@
-package com.novatec.MSCards.domain.utils;
+package com.novatec.MSCards.domain.utils.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

@@ -5,7 +5,7 @@ import com.novatec.MSCards.domain.utils.exception.CardAlreadyBlockedException;
 import com.novatec.MSCards.domain.utils.exception.CardAlreadyExistsException;
 import com.novatec.MSCards.domain.utils.exception.CardBlockedException;
 import com.novatec.MSCards.domain.utils.exception.CardNotFoundException;
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
 
-@Api(value = "Controlador que contiene el manejo de excepciones del microservicio.")
+@Tag(name = "customExceotionHandler", description = "Controlador que contiene el manejo de excepciones del " +
+        "microservicio.")
 @ControllerAdvice
 public class CustomExceptionHandler {
 
