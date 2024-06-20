@@ -89,3 +89,7 @@ se seguirían los pasos de la próxima sección.
 
 - [Swagger MSCards](http://localhost:8080/swagger-ui/index.html)
 - [Swagger MSTransactions](http://localhost:8081/swagger-ui/index.html)
+
+## Disclaimer final
+Se recomienda avisar al desarrollador cuando hayan finalizado las validaciones sobre la solución implementada para
+poder dar de baja los recursos de nube y de esta manera evitar cobros inesperados. Gracias.
