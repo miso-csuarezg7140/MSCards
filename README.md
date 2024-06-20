@@ -44,3 +44,48 @@ Una imagen ilustrativa de la estrategia de despliegue implementado en cuanto a e
 se encuentra a continuación.
 
 ![](/assets/despliegue.png)
+
+## Enlaces a repositorios
+- [Repositorio MSCards](https://github.com/miso-csuarezg7140/MSCards)
+
+- [RepositorioMSTransactions](https://github.com/miso-csuarezg7140/MSTransactions/)
+
+## Instrucciones de ejecución en nube
+
+1) Descargar la colección Postman que se encuentra [aquí](/assets/Prueba%20técnica%20Novatec.postman_collection.json).
+2) Importar la colección en la herramienta Postman.
+3) Ejecutar los diferentes métodos presentes en la colección.
+
+**Nota:** Por defecto, la variable presente en todos lo métodos de la colección es **{{cloudEnv}}**, lo cual hace que
+se ejecute la aplicación en al nube de GCP, sin embargo, si se quisiera montar la aplicación en local con Docker,
+se seguirían los pasos de la próxima sección.
+
+## Instrucciones de ejecución local
+
+1) Informar al desarrollador de este proyecto la IP local para dar los respectivos permisos a las base de datos de
+   PostgreSQL en CloudSQL.
+2) Contar con Docker descargado y corriendo.
+3) En la ruta principal de cada proyecto (ver sección **"Enlace a repositorios"** arriba), ejecutar los siguientes
+   comandos:
+
+- **MSCards:**
+
+``docker build -t ms-cards:latest .``
+
+``docker run -d -p 8080:8080 ms-cards:latest``
+
+- **MSTransactions:**
+
+``docker build -t ms-transactions:latest .``
+
+``docker run -d -p 8081:8081 ms-transactions:latest``
+
+4) En los métodos de la colección de Postman es necesario cambiar el valor de **{{cloudEnv}}** por
+   **{{localEnvCards}}** y **{{localEnvTransactions}}** de manera correspondiente tanto para el microservicio de
+   tarjetas como el microservicio de transacciones.
+5) Ejecutar los diferentes métodos presentes en la colección.
+6) Si todo funciona correctamente, se podrá observar la documentación de cada microservicio con Swagger en los
+   siguiente enlaces.
+
+- [Swagger MSCards](http://localhost:8080/swagger-ui/index.html)
+- [Swagger MSTransactions](http://localhost:8081/swagger-ui/index.html)
